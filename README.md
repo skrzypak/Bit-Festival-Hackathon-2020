@@ -2,5 +2,6 @@
 
 Kamil
 Łukasz
+Łukasz
 Karol
 Konrad
