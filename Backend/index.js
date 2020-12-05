@@ -19,6 +19,20 @@ app.get('/getCSVFromGOV',async (req, res) => {
   res.send(data2)
 })
 
+app.get('/getNationalRestrictions', async (req, res) => {
+  let date = await new GovStats().getNationalRestrictionsDate();
+
+  // TODO
+  date = date[6] + date[7] + date[8] + date[9] + '-' + date[3] + date[4] + '-' + date[0] + date[1]
+
+  //let n = await new GovStats().existsNationalRestrictionsDate(date);
+
+  //if(n === false) {
+    let obj = await new GovStats().getNationalRestrictionsContent();
+    await new GovStats().pushNationalRestrictions(obj, date);
+  //} else console.log("EXISTS")
+});
+
 app.get('/test',async (req, res) => {
   //let data = await new Database().existsDate()
   // let countiesCsvUri = await new GovStats().getCSVFromGOV('https://www.gov.pl/web/koronawirus/mapa-zarazen-koronawirusem-sars-cov-2-powiaty');

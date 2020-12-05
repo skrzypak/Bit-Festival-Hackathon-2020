@@ -60,31 +60,68 @@ class GovStats {
     /**
      * Get national restriction from gov.pl
      * https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia
+     */
+    getNationalRestrictionsDate = async () => {
+      let uri = "https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia";
+        try {
+          const { data } = await axios.get(uri);
+          const $ = cheerio.load(data);
+          const date = [];
+          $('#main-content > p.event-date').each((_idx, el) => {
+            const d = $(el).text()
+            date.push(d);
+          });
+          return date[0];
+        } catch(e){
+          console.log(e)
+        }
+    }
+
+
+    existsNationalRestrictionsDate = async (date) => {
+      if(this.db.existsNationalRestrictionsToday(date)) return true;
+      else return false;
+    }
+
+    /**
+     * Get national restriction from gov.pl
+     * https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia
+     *
+     */
+    getNationalRestrictionsContent = async () => {
+      let uri = "https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia";
+        try {
+          const { data } = await axios.get(uri);
+          const $ = cheerio.load(data);
+          let headers = [];
+          let contents = [];
+
+          for(let i = 1; i < 16; i += 2) {
+            $('#main-content > div.editor-content > h3:nth-child('+i+')').each((_inx, el) => {
+              headers.push($(el).text());
+            });
+          }
+          for(let j = 2; j < 16; j += 2) {;
+            $('#main-content > div.editor-content > div:nth-child('+j+')').each((_inx, el) => {
+              contents.push($(el).html());
+            });
+          }
+          return {headers: headers, contents: contents};
+        } catch(e){
+          console.log(e)
+        }
+    }
+
+    /**
+     * Get national restriction from gov.pl
+     * https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia
      *
      * nationalRestrictions (header, date_, html)
      */
-    getNationalRestrictions() {
-        let uri = "https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia";
-        try {
-            const { data } = await axios.get(uri);
-            const $ = cheerio.load(data);
-            let date;
-            $('#main-content > p.event-date').each((_idx, el) => {
-              date = $(el).text()
-            });
-
-            console.log(date);
-
-            // Check in database
-            // if(db.existsNationalRestrictionsToday()) return;
-
-
-
-
-
-          } catch(e){
-            console.log(e)
-          }
+    pushNationalRestrictions = async (obj, date) => {
+      for(let i = 0; i < obj.headers.length - 1; i++) {
+        this.db.addNationalRestriciton(obj.headers[i], obj.contents[i], date)
+      }
     }
 }
 
