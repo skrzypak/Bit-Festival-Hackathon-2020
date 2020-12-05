@@ -1,3 +1,4 @@
+import 'package:corona_info/screens/home/homeScreen.dart';
 import 'package:corona_info/widgets/BottomButton.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomeScreen(),        // <------ home page
     );
   }
 }
@@ -37,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children:<Widget>[
-          BottomButton(),
+         Text("Hello")
         ]
       ),
      
