@@ -17,7 +17,7 @@ app.get('/news', (req, res) => {
 })
 
 app.get('/who', (req, res) => {
-  new WhoInformation().getData()
+  new WhoInformation().updateTable()
 })
 
 app.get('/getCSVFromGOV',async (req, res) => {
