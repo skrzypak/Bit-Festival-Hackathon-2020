@@ -11,23 +11,26 @@ class BottomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [CoronaShadow.get()],
-        ),
-        height: 48.0,
-        child: FlatButton(
-          color: CoronaColor().secondary,
-          onPressed: () {},
-          child: Text(
-            title,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),
+      child: FractionallySizedBox(
+        widthFactor: 0.85,
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [CoronaShadow.get()],
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(200),
+          height: 48.0,
+          child: FlatButton(
+            color: CoronaColor().secondary,
+            onPressed: () {},
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(200),
+            ),
           ),
         ),
       ),

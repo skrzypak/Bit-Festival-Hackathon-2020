@@ -1,4 +1,5 @@
 import 'package:corona_info/screens/home/homeScreen.dart';
+import 'package:corona_info/screens/info/articleInfoScreen.dart';
 import 'package:corona_info/screens/info/infoScreen.dart';
 import 'package:corona_info/widgets/BottomButton.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: InformationsScreen(),
+      home: ArticleInfoScreen("Covid-19", "virus"),
     );
   }
 }
