@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(),
               ),
-              BottomButton("AKTUALNE ZASADY I OGRANICZENIA",url: "www.google.com"),
+              BottomButton(title: "AKTUALNE ZASADY I OGRANICZENIA",url: "www.google.com"),
             ],
           ),
         ),
