@@ -3,6 +3,38 @@ const sql = require('mysql')
 const {config} = require('./Config')
 
 class Database {
+  getCountiesData(province){
+    let date = new Date().toISOString().slice(0, 10)
+    let query = `select * from countiesData where (DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59") AND province = "${province}";`
+    let db = this.createConnection()
+    console.log(query)
+    return new Promise((resolve, reject) => {
+      db.connect(()=> {
+        db.query(query, (e, result) => {
+          db.end()
+            resolve(JSON.stringify(result))
+        })
+      })
+    })
+  }
+
+  getProvincesData(){
+    let date = new Date().toISOString().slice(0, 10)
+    let query = `select * from provincesData where DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59";`
+    let db = this.createConnection()
+    return new Promise((resolve, reject) => {
+      db.connect(()=> {
+        db.query(query, (e, result) => {
+          db.end()
+          if(e != null)
+            resolve(0)
+          else
+            resolve(JSON.stringify(result))
+        })
+      })
+    })
+  }
+
   existsProvinceToday(){
     let date = new Date().toISOString().slice(0, 10)
     let query = `select id from provincesData where DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59" limit 1;`
@@ -106,7 +138,7 @@ class Database {
       db.connect(()=> {
         db.query(query, (e, result) => {
           db.end()
-          resolve(result);
+          resolve(JSON.stringify(result));
         })
       })
     })
