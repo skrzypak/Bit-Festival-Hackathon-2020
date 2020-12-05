@@ -61,7 +61,7 @@ class GovStats {
      * Get national restriction from gov.pl
      * https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia
      *
-     * nationalRestrictions (header, html)
+     * nationalRestrictions (header, date_, html)
      */
     getNationalRestrictions() {
         let uri = "https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia";
@@ -73,19 +73,14 @@ class GovStats {
               date = $(el).text()
             });
 
+            console.log(date);
+
             // Check in database
-            let query = `select id from NationalRestrictions where DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59" limit 1;`
-            let db = this.createConnection()
-            return new Promise((resolve, reject) => {
-            db.connect(()=> {
-                db.query(query, (e, result) => {
-                db.end()
-                if(result[0] != undefined)
-                    resolve(true)
-                resolve(false)
-                })
-            })
-            })
+            // if(db.existsNationalRestrictionsToday()) return;
+
+
+
+
 
           } catch(e){
             console.log(e)

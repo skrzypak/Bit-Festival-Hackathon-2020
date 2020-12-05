@@ -18,6 +18,21 @@ class Database {
     })
   }
 
+  existsNationalRestrictionsToday(){
+    let query = `select id from nationalRestrictions where DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59" limit 1;`
+    let db = this.createConnection()
+    return new Promise((resolve, reject) => {
+    db.connect(()=> {
+        db.query(query, (e, result) => {
+        db.end()
+        if(result[0] != undefined)
+            resolve(true)
+           resolve(false)
+        })
+      })
+    })
+  }
+
   existsCountieToday(){
     let date = new Date().toISOString().slice(0, 10)
     let query = `select id from countiesData where DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59" limit 1;`
