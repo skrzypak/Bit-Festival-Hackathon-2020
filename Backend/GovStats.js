@@ -63,7 +63,7 @@ class GovStats {
      *
      * nationalRestrictions (header, date_, html)
      */
-    getNationalRestrictions() {
+    async getNationalRestrictions() {
         let uri = "https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia";
         try {
             const { data } = await axios.get(uri);
@@ -77,10 +77,6 @@ class GovStats {
 
             // Check in database
             // if(db.existsNationalRestrictionsToday()) return;
-
-
-
-
 
           } catch(e){
             console.log(e)

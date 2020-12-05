@@ -2,12 +2,22 @@ const express = require('express')
 const mysql = require('mysql');
 const GovStats = require('./GovStats')
 const Database = require('./Database')
-const cheerio = require('cheerio')
+const cheerio = require('cheerio');
+const WhoInformation = require('./WhoInformation');
+const News = require('./News');
 const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
+})
+
+app.get('/news', (req, res) => {
+  new News().getOnetNews()
+})
+
+app.get('/who', (req, res) => {
+  new WhoInformation().getData()
 })
 
 app.get('/getCSVFromGOV',async (req, res) => {
