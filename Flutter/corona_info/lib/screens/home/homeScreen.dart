@@ -17,6 +17,45 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_socket_io/flutter_socket_io.dart';
 import 'package:flutter_socket_io/socket_io_manager.dart';
 
+class HomeFechData {
+  final String id;
+  final String province;
+  final String date_;
+  final String activeNumber;
+  final String activeNumberPer10k;
+  final String deaths;
+  final String deathsWithoutIll;
+  final String deathsWithIll;
+
+  HomeFechData(
+      this.id,
+      this.province,
+      this.date_,
+      this.activeNumber,
+      this.activeNumberPer10k,
+      this.deaths,
+      this.deathsWithoutIll,
+      this.deathsWithIll) {}
+
+  // factory HomeFechData.fromJson(Map<String, dynamic> json) {
+  //    return HomeFechData(
+  //        make: json['id'],
+  //        title: json['title'],
+  //        link: json['link'].toString()
+  //       );
+  //   }
+
+  HomeFechData.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        province = json['province'],
+        date_ = json['date_'],
+        activeNumber = json['activeNumber'],
+        activeNumberPer10k = json['activeNumberPer10k'],
+        deaths = json['deaths'],
+        deathsWithoutIll = json['deathsWithoutIll'],
+        deathsWithIll = json['deathsWithIll'];
+}
+
 class HomeScreen extends StatefulWidget {
   SocketIO socketIO;
   List<String> messages;
@@ -25,12 +64,41 @@ class HomeScreen extends StatefulWidget {
     initState();
   }
 
+  Future<http.Response> fetchAlbum() {
+    return http.get('http://89.74.231.9:8080');
+  }
+
   Future<void> initState() async {
-    var url = 'http://89.74.231.9:8080';
-    var response = await http.get('http://89.74.231.9:8080/?');
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    print(await http.read('http://89.74.231.9:8080/?'));
+    var url = 'http://89.74.231.9:8080'; //
+    var response = await http.get(url + '/countryDaily?'); //
+    //print('Response status: ${response.statusCode}');
+
+    if (response.statusCode == 200) {
+      List<dynamic> values = new List<dynamic>();
+      List<Map<String, dynamic>> _homeFechData =
+          new List<Map<String, dynamic>>();
+      values = json.decode(response.body);
+      if (values.length > 0) {
+        for (int i = 0; i < values.length; i++) {
+          if (values[i] != null) {
+            Map<String, dynamic> map = values[i];
+
+            //TODO ...
+
+            print(map);
+
+            // ......
+
+            //print(map);
+            //_homeFechData.add(HomeFechData.fromJson(map));
+            //debugPrint('Id-------${map['id']}');
+          }
+        }
+      }
+      return _homeFechData;
+      //print('Response body: ${response.body}');
+      //print(await http.read('http://89.74.231.9:8080/?'));
+    }
   }
 
   //HomeScreen({Key key}) : super(key: key);
@@ -144,7 +212,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(),
               ),
-              BottomButton(title: "AKTUALNE ZASADY I OGRANICZENIA",url: "www.google.com"),
+              BottomButton(
+                  title: "AKTUALNE ZASADY I OGRANICZENIA",
+                  url: "www.google.com"),
             ],
           ),
         ),
