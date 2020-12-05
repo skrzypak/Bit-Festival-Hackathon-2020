@@ -4,21 +4,27 @@ import 'package:flutter_svg/flutter_svg.dart';
 class MyAppBar extends StatelessWidget {
   final String title;
   final String icon;
-  MyAppBar(this.title, {this.icon = "", Key key}) : super(key: key);
+  final String parameter;
+  MyAppBar(this.title, {this.icon = "", this.parameter = "", Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Icon(Icons.arrow_back, color: Colors.black87),
+      leading: GestureDetector(
+        child: Icon(Icons.arrow_back, color: Colors.black87),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
       title: Row(
         children: [
           Text(title, style: TextStyle(color: Colors.black87)),
           Padding(
             padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
             child: SvgPicture.asset(
-                        "assets/" + icon + ".svg",
-                        height: 22,
-                      ),
+              "assets/" + icon + ".svg",
+              height: 22,
+            ),
           ),
         ],
       ),
