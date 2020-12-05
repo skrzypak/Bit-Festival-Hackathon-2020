@@ -7,6 +7,7 @@ class ArticleInfoScreen extends StatelessWidget {
 
   String title;
   String icon;
+  String buttonUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class ArticleInfoScreen extends StatelessWidget {
               ),
             ),
             Expanded(child: Container()),
-            BottomButton("WWW.WHO.INT", () {}),
+            BottomButton("WWW.WHO.INT", url: buttonUrl),
           ],
         ),
       )),

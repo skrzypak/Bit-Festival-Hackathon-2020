@@ -1,12 +1,13 @@
 import 'package:corona_info/utils/Colors.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Shadow.dart';
 
 class BottomButton extends StatelessWidget {
   String title;
-  Function() onpressed;
-  BottomButton(this.title, this.onpressed);
+  String url;
+  BottomButton(this.title, {url=""});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,9 @@ class BottomButton extends StatelessWidget {
           height: 48.0,
           child: FlatButton(
             color: CoronaColor().secondary,
-            onPressed: onpressed,
+            onPressed: () {
+              if(url.isNotEmpty)
+              _launchURL();},
             child: Text(
               title,
               style: TextStyle(
@@ -36,5 +39,15 @@ class BottomButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+
+  _launchURL() async {
+    const url = 'buttonUrl';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

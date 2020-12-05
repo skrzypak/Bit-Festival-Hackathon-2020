@@ -49,6 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
     "Aktualności"
   ];
 
+  _launchURL() async {
+    const url = 'https://pacjent.gov.pl';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,13 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 child: HomeScreenOptionTab("Pacjent GOV", "mask"),
-                onTap: () async {
-                  const url = 'https://pacjent.gov.pl/';
-                  if (await canLaunch(url)) {
-                    await launch(url);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
+                onTap: () {
+                  _launchURL();
                 },
               ),
               GestureDetector(
@@ -140,14 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(),
               ),
-              BottomButton("AKTUALNE ZASADY I OGRANICZENIA", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return ClosestTestingPoint();
-                  }),
-                );
-              }),
+              BottomButton("AKTUALNE ZASADY I OGRANICZENIA",
+                  url: "www.google.com"),
             ],
           ),
         ),

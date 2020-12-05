@@ -22,9 +22,7 @@ class StatisticsScreen extends StatelessWidget {
             child: SafeArea(
               child: ListView(
                 children: <Widget>[
-                  Container(
-                    child: MyAppBar("Statystyki"),
-                  ),
+                  Container(child: MyAppBar("Statystyki", temp: true)),
                   Align(
                     alignment: Alignment.center,
                     child: Padding(
@@ -51,10 +49,7 @@ class StatisticsScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 35, 20, 0),
                     child: Column(
-                      children: statsValues
-                          .map((row) =>
-                              new StatisticsSingleRow(row[0], row[1], row[2]))
-                          .toList(),
+                      children: statsValues.map((row) => new StatisticsSingleRow(row[0], row[1], row[2])).toList(),
                     ),
                   ),
                   Expanded(child: Container()),
@@ -64,8 +59,7 @@ class StatisticsScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(40),
-                        border:
-                            Border.all(color: CoronaColor().primary, width: 3),
+                        border: Border.all(color: CoronaColor().primary, width: 3),
                       ),
                       child: ToggleSwitch(
                         activeBgColor: CoronaColor().primary,
