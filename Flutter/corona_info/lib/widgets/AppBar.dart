@@ -15,7 +15,7 @@ class MyAppBar extends StatelessWidget {
           child: Icon(Icons.search, color: Colors.black87),
         ),
       ],
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
     );
   }
 }
