@@ -31,6 +31,11 @@ app.get('/refreshCsvdataCountiesDB',async (req, res) => {
   res.send("")
 })
 
+app.get('/refreshTestPointsLocationDB',async (req, res) => {
+  await new GovStats().getTestPointsLocation();
+  res.send("")
+})
+
 app.get('/refreshNationalRestrictionsDB', async (req, res) => {
   let date = await new GovStats().getNationalRestrictionsDate();
   date = date[6] + date[7] + date[8] + date[9] + '-' + date[3] + date[4] + '-' + date[0] + date[1]
@@ -40,7 +45,6 @@ app.get('/refreshNationalRestrictionsDB', async (req, res) => {
     await new GovStats().pushNationalRestrictions(obj, date);
     res.send(true)
   } else res.send(false)
-
 });
 
 /**

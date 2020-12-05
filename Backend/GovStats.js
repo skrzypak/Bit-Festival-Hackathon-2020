@@ -113,6 +113,19 @@ class GovStats {
         }
     }
 
+    getTestPointsLocation = async () => {
+
+      let uri = "https://pacjent.gov.pl/aktualnosc/test-w-mobilnym-punkcie-pobran";
+        try {
+          const { data } = await axios.get(uri);
+          const $ = cheerio.load(data);;
+          let x = $('body > div.dialog-off-canvas-main-canvas > main > div:nth-child(5) > div.google-map').data("url");
+          this.db.updateTestPointsLocation(x)
+        } catch(e){
+          console.log(e)
+        }
+    }
+
     /**
      * Get national restriction from gov.pl
      * https://www.gov.pl/web/koronawirus/aktualne-zasady-i-ograniczenia
