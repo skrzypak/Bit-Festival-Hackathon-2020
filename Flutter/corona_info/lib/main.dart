@@ -5,6 +5,8 @@ import 'package:corona_info/screens/restrictions/articleRestrictionsScreen.dart'
 import 'package:corona_info/widgets/BottomButton.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/statistics/statisticsScreen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: ArticleRestrictionsScreen("Ograniczenia"),
+      home: StatisticsScreen(),
     );
   }
 }
