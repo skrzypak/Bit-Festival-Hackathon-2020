@@ -3,6 +3,7 @@ import 'package:corona_info/widgets/BottomButton.dart';
 import 'package:corona_info/widgets/FontStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen();
@@ -14,8 +15,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   double statsColumnSpacing = 15;
-  List<String> menuOptions = ["Statystyki", "Informacje o Covid 19", "Porównanie symptomów", "Pacjent GOV", "Aktualności"];
+  List<String> menuOptions = [
+    "Statystyki",
+    "Informacje o Covid 19",
+    "Porównanie symptomów",
+    "Pacjent GOV",
+    "Aktualności"
+  ];
 
+  _launchURL() async {
+    const url = 'https://pacjent.gov.pl';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
               HomeScreenOptionTab("Statystyki", "pie-chart"),
               HomeScreenOptionTab("Informacje o Covid-19", "information"),
               HomeScreenOptionTab("Porównanie symptomów", "checklist"),
-              HomeScreenOptionTab("Pacjent GOV", "mask"),
+              GestureDetector(
+                child: HomeScreenOptionTab("Pacjent GOV", "mask"),
+                onTap: () {
+                  _launchURL();
+                },
+              ),
               HomeScreenOptionTab("Aktualności", "newspaper"),
               HomeScreenOptionTab("Najbliższy punkt poboru próbek", "seo"),
               Expanded(
@@ -56,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeScreenOptionTab extends StatelessWidget {
- 
   HomeScreenOptionTab(this.option, this.image);
 
   String image;
@@ -69,8 +88,10 @@ class HomeScreenOptionTab extends StatelessWidget {
       child: Container(
           child: Row(
         children: [
-          SvgPicture.asset("assets/" + image +".svg",
-          height: 32,),
+          SvgPicture.asset(
+            "assets/" + image + ".svg",
+            height: 32,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(27, 0, 0, 0),
             child: Text(
@@ -137,22 +158,29 @@ class StatsIconColumn extends StatelessWidget {
   double columnSpacing;
   StatsIconColumn(this.columnSpacing);
   final Widget svgMedicine = SvgPicture.asset("assets/medicine.svg");
-  
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      SvgPicture.asset("assets/virus.svg",
-      height: 22,),
+      SvgPicture.asset(
+        "assets/virus.svg",
+        height: 22,
+      ),
       SizedBox(height: columnSpacing),
-      SvgPicture.asset("assets/healthy.svg",
-      height: 22,),
+      SvgPicture.asset(
+        "assets/healthy.svg",
+        height: 22,
+      ),
       SizedBox(height: columnSpacing),
-      SvgPicture.asset("assets/death.svg",
-      height: 22,),
+      SvgPicture.asset(
+        "assets/death.svg",
+        height: 22,
+      ),
       SizedBox(height: columnSpacing),
-      SvgPicture.asset("assets/patient.svg",
-      height: 22,),
+      SvgPicture.asset(
+        "assets/patient.svg",
+        height: 22,
+      ),
     ]);
   }
 }
