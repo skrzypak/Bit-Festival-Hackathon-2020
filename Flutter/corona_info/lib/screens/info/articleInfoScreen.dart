@@ -48,7 +48,7 @@ class ArticleInfoScreen extends StatelessWidget {
               ),
             ),
             Expanded(child: Container()),
-            BottomButton("WWW.WHO.INT"),
+            BottomButton("WWW.WHO.INT", () {}),
           ],
         ),
       )),
