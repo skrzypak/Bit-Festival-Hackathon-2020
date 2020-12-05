@@ -191,7 +191,6 @@ class StatisticsScreen extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 25),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.green,
                         borderRadius: BorderRadius.circular(40),
                         border:
                             Border.all(color: CoronaColor().primary, width: 3),
@@ -201,7 +200,7 @@ class StatisticsScreen extends StatelessWidget {
                         activeFgColor: Colors.black87,
                         inactiveBgColor: Colors.white,
                         cornerRadius: 200,
-                        minWidth: 100,
+                        minWidth: 121.128,
                         initialLabelIndex: 0,
                         labels: ['Tygodniowe', 'Miesięczne', 'Całość'],
                         onToggle: (index) {

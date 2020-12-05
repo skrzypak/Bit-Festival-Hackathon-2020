@@ -49,7 +49,7 @@ class ArticleInfoScreen extends StatelessWidget {
               ),
             ),
             Expanded(child: Container()),
-            BottomButton(url: buttonUrl, title: buttonUrl.toString().substring(0,15)),
+            BottomButton(title: title, url: buttonUrl),
           ],
         ),
       )),
