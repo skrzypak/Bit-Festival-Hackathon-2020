@@ -1,15 +1,17 @@
+import 'package:flutter/material.dart';
 
+class MyAppBar extends StatelessWidget {
+  MyAppBar({Key key}) : super(key: key);
 
-AppBar(
-  leading: Icon(Icons.arrow_back_sharp),
-  title: Text('Page title'),
-  actions: [
-    Icon(Icons.favorite),
-    Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Icon(Icons.search),
-    ),
-    Icon(Icons.more_vert),
-  ],
-  backgroundColor: Colors.purple,
-),
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: Icon(Icons.arrow_back),
+      title: Text('Page title'),
+      actions: [
+        Icon(Icons.more_vert),
+      ],
+      backgroundColor: Colors.purple,
+    );
+  }
+}
