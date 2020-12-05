@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/translate": "^6.0.4",
     "axios": "^0.21.0",
     "cheerio": "^1.0.0-rc.3",
     "csv-parser": "^3.0.0",
@@ -17,6 +18,7 @@
     "express": "^4.17.1",
     "fast-csv": "^4.3.6",
     "fs": "0.0.1-security",
+    "google-translate": "^3.0.0",
     "mysql": "^2.18.1",
     "newsapi": "^2.4.1",
     "papaparse": "^5.3.0",
