@@ -19,66 +19,70 @@ class StatisticsScreen extends StatelessWidget {
       body: Container(
         child: Center(
           child: Expanded(
-            child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  child: MyAppBar("Statystyki"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Text(
-                    "Polska",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.normal,
+            child: SafeArea(
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    child: MyAppBar("Statystyki"),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      child: Text(
+                        "Polska",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                  child: Align(
-                    alignment: Alignment.topCenter,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        height: 250,
+                        child: SimpleTimeSeriesChart.withSampleData(),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 35, 20, 0),
+                    child: Column(
+                      children: statsValues
+                          .map((row) =>
+                              new StatisticsSingleRow(row[0], row[1], row[2]))
+                          .toList(),
+                    ),
+                  ),
+                  Expanded(child: Container()),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 25),
                     child: Container(
-                      height: 250,
-                      child: SimpleTimeSeriesChart.withSampleData(),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(40),
+                        border:
+                            Border.all(color: CoronaColor().primary, width: 3),
+                      ),
+                      child: ToggleSwitch(
+                        activeBgColor: CoronaColor().primary,
+                        activeFgColor: Colors.black87,
+                        inactiveBgColor: Colors.white,
+                        cornerRadius: 200,
+                        minWidth: 100,
+                        initialLabelIndex: 0,
+                        labels: ['Tygodniowe', 'Miesięczne', 'Całość'],
+                        onToggle: (index) {
+                          print('switched to: $index');
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 35, 20, 0),
-                  child: Column(
-                    children: statsValues
-                        .map((row) =>
-                            new StatisticsSingleRow(row[0], row[1], row[2]))
-                        .toList(),
-                  ),
-                ),
-                Expanded(child: Container()),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(40),
-                      border:
-                          Border.all(color: CoronaColor().primary, width: 3),
-                    ),
-                    child: ToggleSwitch(
-                      activeBgColor: CoronaColor().primary,
-                      activeFgColor: Colors.black87,
-                      inactiveBgColor: Colors.white,
-                      cornerRadius: 200,
-                      minWidth: 100,
-                      initialLabelIndex: 0,
-                      labels: ['Tygodniowe', 'Miesięczne', 'Całość'],
-                      onToggle: (index) {
-                        print('switched to: $index');
-                      },
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -1,9 +1,6 @@
-import 'package:corona_info/main.dart';
 import 'package:corona_info/widgets/AppBar.dart';
 import 'package:corona_info/widgets/BottomButton.dart';
-import 'package:corona_info/widgets/FontStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ArticleInfoScreen extends StatelessWidget {
   ArticleInfoScreen(this.title, this.icon);

@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               HomeScreenOptionTab("Porównanie symptomów", "checklist"),
               HomeScreenOptionTab("Pacjent GOV", "mask"),
               HomeScreenOptionTab("Aktualności", "newspaper"),
+              HomeScreenOptionTab("Najbliższy punkt poboru próbek", "seo"),
               Expanded(
                 child: Container(),
               ),
