@@ -5,7 +5,8 @@ import 'Shadow.dart';
 
 class BottomButton extends StatelessWidget {
   String title;
-  BottomButton(this.title);
+  Function() onpressed;
+  BottomButton(this.title, this.onpressed);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class BottomButton extends StatelessWidget {
           height: 48.0,
           child: FlatButton(
             color: CoronaColor().secondary,
-            onPressed: () {},
+            onPressed: onpressed,
             child: Text(
               title,
               style: TextStyle(
