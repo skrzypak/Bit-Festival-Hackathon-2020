@@ -3,8 +3,15 @@ import 'package:corona_info/widgets/BottomButton.dart';
 import 'package:corona_info/widgets/FontStyle.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen();
+  //HomeScreen({Key key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
 
   double statsColumnSpacing = 15;
 
