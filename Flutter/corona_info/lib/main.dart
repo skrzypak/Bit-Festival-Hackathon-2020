@@ -1,3 +1,4 @@
+import 'package:corona_info/screens/home/homeScreen.dart';
 import 'package:corona_info/screens/restrictions/RestrictionsScreen.dart';
 import 'package:corona_info/widgets/BottomButton.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      //home: MyHomePage(title: 'Flutter Demo Home Page'),
-      home: RestrictionScreen(),
+      home: HomeScreen(),
+      //home: RestrictionScreen(),
     );
   }
 }
@@ -38,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Sample Code'),
       ),
       body: Column(children: <Widget>[
-        BottomButton(),
+        Text("Hello"),
       ]),
     );
   }
