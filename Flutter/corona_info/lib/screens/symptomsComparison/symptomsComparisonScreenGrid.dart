@@ -36,7 +36,7 @@ class SymptomsComparisonGrid extends StatelessWidget {
               crossAxisCount: 4,
               shrinkWrap: true,
               children: List.generate(choices.length, (index) {
-                return Center(child: Container(child: ChoiceCard(choice: choices[index])));
+                return Center(child: Container(child: TileCard(choice: choices[index])));
               })),
         ]),
       ),
@@ -50,8 +50,8 @@ class Type {
   final IconData icon;
 }
 
-class ChoiceCard extends StatelessWidget {
-  const ChoiceCard({Key key, this.choice}) : super(key: key);
+class TileCard extends StatelessWidget {
+  const TileCard({Key key, this.choice}) : super(key: key);
   final Type choice;
 
   @override
