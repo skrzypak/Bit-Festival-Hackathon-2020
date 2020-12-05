@@ -3,5 +3,5 @@
 Kamil
 Łukasz
 Łukasz
-Karol
+Karol Piechota
 Konrad
