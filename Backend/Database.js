@@ -1,3 +1,4 @@
+const { response } = require('express')
 const sql = require('mysql')
 const {config} = require('./Config')
 
@@ -99,10 +100,21 @@ class Database {
     })
   }
 
+  async get(query) {
+    let db = this.createConnection()
+    return new Promise((resolve, reject) => {
+      db.connect(()=> {
+        db.query(query, (e, result) => {
+          db.end()
+          resolve(result);
+        })
+      })
+    })
+  }
+
   createConnection(){
     return sql.createConnection(config)
   }
-
 
 }
 

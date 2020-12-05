@@ -1,7 +1,8 @@
 import 'package:corona_info/screens/home/homeScreen.dart';
 import 'package:corona_info/screens/info/articleInfoScreen.dart';
 import 'package:corona_info/screens/info/infoScreen.dart';
-import 'package:corona_info/screens/restrictions/articleRestrictionsScreen.dart';
+import 'package:corona_info/screens/news/newsFilters.dart';
+import 'package:corona_info/screens/news/newsScreen.dart';
 import 'package:corona_info/widgets/BottomButton.dart';
 import 'package:flutter/material.dart';
 
