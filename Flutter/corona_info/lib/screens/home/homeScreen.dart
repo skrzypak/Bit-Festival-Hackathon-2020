@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:corona_info/screens/closestTestingPoint/closestTestingPoint.dart';
 import 'package:corona_info/screens/info/infoScreen.dart';
 import 'package:corona_info/screens/news/newsScreen.dart';
@@ -9,9 +11,67 @@ import 'package:corona_info/widgets/FontStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
+import 'package:flutter_socket_io/flutter_socket_io.dart';
+import 'package:flutter_socket_io/socket_io_manager.dart';
+
+class HomeFechData {
+  final String make;
+  final String model;
+
+  HomeFechData(this.make, this.model) {}
+
+  // factory HomeFechData.fromJson(Map<String, dynamic> json) {
+  //    return HomeFechData(
+  //        make: json['id'],
+  //        title: json['title'],
+  //        link: json['link'].toString()
+  //       );
+  //   }
+
+  HomeFechData.fromJson(Map<String, dynamic> json)
+      : make = json['make'],
+        model = json['model'];
+}
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen() {}
+  SocketIO socketIO;
+  List<String> messages;
+
+  HomeScreen() {
+    initState();
+  }
+
+  Future<http.Response> fetchAlbum() {
+    return http.get('http://89.74.231.9:8080');
+  }
+
+  Future<void> initState() async {
+    var url = 'http://89.74.231.9:8080'; //
+    var response = await http.get(url + '/?'); //
+    //print('Response status: ${response.statusCode}');
+
+    List<HomeFechData> _homeFechData = new List<HomeFechData>();
+    if (response.statusCode == 200) {
+      List<dynamic> values = new List<dynamic>();
+      values = json.decode(response.body);
+      if (values.length > 0) {
+        for (int i = 0; i < values.length; i++) {
+          if (values[i] != null) {
+            Map<String, dynamic> map = values[i];
+            _homeFechData.add(HomeFechData.fromJson(map));
+            debugPrint('Id-------${map['id']}');
+          }
+        }
+      }
+      return _homeFechData;
+
+      //print('Response body: ${response.body}');
+      //print(await http.read('http://89.74.231.9:8080/?'));
+    }
+  }
 
   //HomeScreen({Key key}) : super(key: key);
 
@@ -124,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(),
               ),
-              BottomButton("AKTUALNE ZASADY I OGRANICZENIA",url: "www.google.com"),
+              BottomButton(title: "AKTUALNE ZASADY I OGRANICZENIA",url: "www.google.com"),
             ],
           ),
         ),
