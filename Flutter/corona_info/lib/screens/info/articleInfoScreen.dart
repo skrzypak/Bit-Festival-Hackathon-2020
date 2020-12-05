@@ -3,11 +3,11 @@ import 'package:corona_info/widgets/BottomButton.dart';
 import 'package:flutter/material.dart';
 
 class ArticleInfoScreen extends StatelessWidget {
-  ArticleInfoScreen(this.title, this.icon);
+  ArticleInfoScreen({this.title="", this.icon="", this.buttonUrl=""});
 
-  String title;
-  String icon;
-  String buttonUrl;
+  final String title;
+  final String icon;
+  final String buttonUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ArticleInfoScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
                 child: Text(
-                  "Co to jest COVID-19?",
+                  title,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                 ),
               ),
@@ -49,7 +49,7 @@ class ArticleInfoScreen extends StatelessWidget {
               ),
             ),
             Expanded(child: Container()),
-            BottomButton("WWW.WHO.INT", url: buttonUrl),
+            BottomButton(url: buttonUrl, title: buttonUrl.toString().substring(0,15)),
           ],
         ),
       )),

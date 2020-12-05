@@ -30,7 +30,7 @@ class ClosestTestingPoint extends StatelessWidget {
             Text(hours),
             Text(telephone),
             Expanded(child: Container()),
-            //BottomButton("PEŁNA LISTA PUNKTÓW", () {}),
+            BottomButton(title:"PEŁNA LISTA PUNKTÓW"),
           ],
         ),
       )),

@@ -37,7 +37,7 @@ class ArticleRestrictionsScreen extends StatelessWidget {
                   "Obowiązek utrzymania co najmniej 1,5-metrowej odległości między pieszymi.\nWyłączeni z tego obowiązku są:\n* rodzice z dziećmi wymagającymi opieki (do 13. roku   życia),\n*osoby wspólnie mieszkające lub gospodarujące,\n*osoby niepełnosprawne, niemogące się samodzielnie poruszać, osoby z orzeczeniem o potrzebie kształcenia specjalnego i ich opiekunowie."),
             ),
             Expanded(child: Container()),
-            //BottomButton("WWW.WHO.INT", () {}),
+            BottomButton(title: "WWW.WHO.INT",url: "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub"),
           ],
         ),
       )),
