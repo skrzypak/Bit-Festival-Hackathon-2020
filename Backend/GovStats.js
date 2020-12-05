@@ -79,7 +79,8 @@ class GovStats {
 
 
     existsNationalRestrictionsDate = async (date) => {
-      if(this.db.existsNationalRestrictionsToday(date)) return true;
+      let n = await this.db.existsNationalRestrictionsToday(date);
+      if(n === true) return true;
       else return false;
     }
 

@@ -24,13 +24,14 @@ app.get('/getNationalRestrictions', async (req, res) => {
 
   // TODO
   date = date[6] + date[7] + date[8] + date[9] + '-' + date[3] + date[4] + '-' + date[0] + date[1]
+  let n = await new GovStats().existsNationalRestrictionsDate(date);
 
-  //let n = await new GovStats().existsNationalRestrictionsDate(date);
-
-  //if(n === false) {
+  if(n === false) {
     let obj = await new GovStats().getNationalRestrictionsContent();
     await new GovStats().pushNationalRestrictions(obj, date);
-  //} else console.log("EXISTS")
+
+    res.send(true)
+  } else console.log("EXISTS")
 });
 
 app.get('/test',async (req, res) => {
