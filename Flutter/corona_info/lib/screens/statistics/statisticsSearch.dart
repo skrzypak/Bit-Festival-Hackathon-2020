@@ -14,6 +14,7 @@ class StatisticSearch extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Container(child: MyAppBar("Obostrzenia")),
+              Container(child: TextField()),
               singleRow('Polska'),
               singleRow('Powiat1'),
               singleRow('Powiat2'),

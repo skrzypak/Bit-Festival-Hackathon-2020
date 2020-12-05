@@ -11,7 +11,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen();
+  HomeScreen() {}
+
   //HomeScreen({Key key}) : super(key: key);
 
   @override
@@ -117,14 +118,17 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(),
               ),
-              BottomButton("AKTUALNE ZASADY I OGRANICZENIA", () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return ClosestTestingPoint();
-                  }),
-                );
-              }),
+              BottomButton(
+                "AKTUALNE ZASADY I OGRANICZENIA",
+                () async {
+                  const url = 'www.google.com';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+              ),
             ],
           ),
         ),
