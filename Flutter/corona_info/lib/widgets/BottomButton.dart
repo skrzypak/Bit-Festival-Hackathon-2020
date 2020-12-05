@@ -7,7 +7,15 @@ import 'Shadow.dart';
 class BottomButton extends StatelessWidget {
   String title;
   String url;
-  BottomButton({this.title, url=""});
+  BottomButton({this.title, this.url=""});
+
+   _launchURL() async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +31,7 @@ class BottomButton extends StatelessWidget {
           child: FlatButton(
             color: CoronaColor().secondary,
             onPressed: () {
-              if(url != null && url.isNotEmpty)
+              if(url.isNotEmpty)
               _launchURL();},
             child: Text(
               title,
@@ -39,14 +47,5 @@ class BottomButton extends StatelessWidget {
         ),
       ),
     );
-  }
-
-
-  _launchURL() async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }
