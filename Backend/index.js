@@ -6,18 +6,20 @@ const cheerio = require('cheerio');
 const WhoInformation = require('./WhoInformation');
 const News = require('./News');
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/news', (req, res) => {
-  new News().getOnetNews()
+app.get('/news',async (req, res) => {
+  const data = await new News().getOnetNews()
+  res.send(data)
 })
 
 app.get('/who', (req, res) => {
-  new WhoInformation().getData()
+  new WhoInformation().updateTable()
+  res.send("Done")
 })
 
 app.get('/getCSVFromGOV',async (req, res) => {
@@ -44,14 +46,7 @@ app.get('/getNationalRestrictions', async (req, res) => {
   } else console.log("EXISTS")
 });
 
-app.get('/test',async (req, res) => {
-  //let data = await new Database().existsDate()
-  // let countiesCsvUri = await new GovStats().getCSVFromGOV('https://www.gov.pl/web/koronawirus/mapa-zarazen-koronawirusem-sars-cov-2-powiaty');
-  // console.log("elo: ", countiesCsvUri)
 
-  res.send(data)
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`)
 })

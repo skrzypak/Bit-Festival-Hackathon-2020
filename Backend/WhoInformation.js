@@ -11,7 +11,7 @@ class WhoInformation {
       let conn = this.db.createConnection()
       conn.connect(()=>{
         conn.query('truncate whoInfo;')
-        for(let i = 1; i < 2; i++){
+        for(let i = 1; i < 17; i++){
           let header = $(`#sf-accordion > div:nth-child(${i}) > div.sf-accordion__trigger-panel > a`).text()
           let content = $(`#sf-accordion > div:nth-child(${i}) > div.sf-accordion__content`)
           let query = `INSERT INTO whoInfo (header, content) VALUES ("${header}", '${content.html().replace(`'`,`\\`)}')`
