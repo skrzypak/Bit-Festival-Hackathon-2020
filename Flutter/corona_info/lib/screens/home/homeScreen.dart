@@ -18,10 +18,24 @@ import 'package:flutter_socket_io/flutter_socket_io.dart';
 import 'package:flutter_socket_io/socket_io_manager.dart';
 
 class HomeFechData {
-  final String make;
-  final String model;
+  final String id;
+  final String province;
+  final String date_;
+  final String activeNumber;
+  final String activeNumberPer10k;
+  final String deaths;
+  final String deathsWithoutIll;
+  final String deathsWithIll;
 
-  HomeFechData(this.make, this.model) {}
+  HomeFechData(
+      this.id,
+      this.province,
+      this.date_,
+      this.activeNumber,
+      this.activeNumberPer10k,
+      this.deaths,
+      this.deathsWithoutIll,
+      this.deathsWithIll) {}
 
   // factory HomeFechData.fromJson(Map<String, dynamic> json) {
   //    return HomeFechData(
@@ -32,8 +46,14 @@ class HomeFechData {
   //   }
 
   HomeFechData.fromJson(Map<String, dynamic> json)
-      : make = json['make'],
-        model = json['model'];
+      : id = json['id'],
+        province = json['province'],
+        date_ = json['date_'],
+        activeNumber = json['activeNumber'],
+        activeNumberPer10k = json['activeNumberPer10k'],
+        deaths = json['deaths'],
+        deathsWithoutIll = json['deathsWithoutIll'],
+        deathsWithIll = json['deathsWithIll'];
 }
 
 class HomeScreen extends StatefulWidget {
@@ -50,24 +70,32 @@ class HomeScreen extends StatefulWidget {
 
   Future<void> initState() async {
     var url = 'http://89.74.231.9:8080'; //
-    var response = await http.get(url + '/?'); //
+    var response = await http.get(url + '/countryDaily?'); //
     //print('Response status: ${response.statusCode}');
 
-    List<HomeFechData> _homeFechData = new List<HomeFechData>();
     if (response.statusCode == 200) {
       List<dynamic> values = new List<dynamic>();
+      List<Map<String, dynamic>> _homeFechData =
+          new List<Map<String, dynamic>>();
       values = json.decode(response.body);
       if (values.length > 0) {
         for (int i = 0; i < values.length; i++) {
           if (values[i] != null) {
             Map<String, dynamic> map = values[i];
-            _homeFechData.add(HomeFechData.fromJson(map));
-            debugPrint('Id-------${map['id']}');
+
+            //TODO ...
+
+            print(map);
+
+            // ......
+
+            //print(map);
+            //_homeFechData.add(HomeFechData.fromJson(map));
+            //debugPrint('Id-------${map['id']}');
           }
         }
       }
       return _homeFechData;
-
       //print('Response body: ${response.body}');
       //print(await http.read('http://89.74.231.9:8080/?'));
     }
@@ -184,7 +212,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(),
               ),
-              BottomButton(title: "AKTUALNE ZASADY I OGRANICZENIA",url: "www.google.com"),
+              BottomButton(
+                  title: "AKTUALNE ZASADY I OGRANICZENIA",
+                  url: "www.google.com"),
             ],
           ),
         ),
