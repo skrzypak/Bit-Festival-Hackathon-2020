@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FontStyle {
+class CoronaFontStyle {
   static Text robotoRegular12(String text) {
     return Text(
       text,

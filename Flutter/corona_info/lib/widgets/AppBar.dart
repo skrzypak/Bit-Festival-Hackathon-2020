@@ -15,7 +15,8 @@ class MyAppBar extends StatelessWidget {
           child: Icon(Icons.search, color: Colors.black87),
         ),
       ],
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
     );
   }
 }

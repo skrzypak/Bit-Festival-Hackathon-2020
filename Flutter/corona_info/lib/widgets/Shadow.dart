@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Shadow {
+class CoronaShadow {
  static BoxShadow get() {
     return BoxShadow(
         color: Color.fromRGBO(0, 0, 0, 0.16),
