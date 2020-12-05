@@ -18,7 +18,7 @@ class Database {
     })
   }
 
-  existsNationalRestrictionsToday(){
+  existsNationalRestrictionsToday(date){
     let query = `select id from nationalRestrictions where DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59" limit 1;`
     let db = this.createConnection()
     return new Promise((resolve, reject) => {
@@ -77,9 +77,22 @@ class Database {
     query += data[4] + ', '
     query += data[5] + ', '
     query += data[6] + ');'
-    console.log(query)
     let db = this.createConnection()
     db.connect(()=> {
+      db.query(query, (e) => {
+        db.end()
+      })
+    })
+  }
+
+  async addNationalRestriciton(header, content, date){
+    let query = "INSERT INTO nationalRestrictions (header, date_, html) VALUES ("
+    query += '"' + header + '", '
+    query += '"' + date + '", '
+    query += '\'' + content + '\');'
+    let db = this.createConnection()
+    db.connect(()=> {
+      db.query("truncate table nationalRestrictions", (e) => {})
       db.query(query, (e) => {
         db.end()
       })
