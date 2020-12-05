@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //home: ArticleInfoScreen(buttonUrl: "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub"),
-      home: HomeScreen(),
+      home: NewsScreen(),
     );
   }
 }

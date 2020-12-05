@@ -37,14 +37,7 @@ class HomeFechData {
       this.deathsWithoutIll,
       this.deathsWithIll) {}
 
-  // factory HomeFechData.fromJson(Map<String, dynamic> json) {
-  //    return HomeFechData(
-  //        make: json['id'],
-  //        title: json['title'],
-  //        link: json['link'].toString()
-  //       );
-  //   }
-
+ 
   HomeFechData.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         province = json['province'],
@@ -57,57 +50,16 @@ class HomeFechData {
 }
 
 class HomeScreen extends StatefulWidget {
-  SocketIO socketIO;
-  List<String> messages;
-
-  HomeScreen() {
-    initState();
-  }
-
-  Future<http.Response> fetchAlbum() {
-    return http.get('http://89.74.231.9:8080');
-  }
-
-  Future<void> initState() async {
-    var url = 'http://89.74.231.9:8080'; //
-    var response = await http.get(url + '/countryDaily?'); //
-    //print('Response status: ${response.statusCode}');
-
-    if (response.statusCode == 200) {
-      List<dynamic> values = new List<dynamic>();
-      List<Map<String, dynamic>> _homeFechData =
-          new List<Map<String, dynamic>>();
-      values = json.decode(response.body);
-      if (values.length > 0) {
-        for (int i = 0; i < values.length; i++) {
-          if (values[i] != null) {
-            Map<String, dynamic> map = values[i];
-
-            //TODO ...
-
-            print(map);
-
-            // ......
-
-            //print(map);
-            //_homeFechData.add(HomeFechData.fromJson(map));
-            //debugPrint('Id-------${map['id']}');
-          }
-        }
-      }
-      return _homeFechData;
-      //print('Response body: ${response.body}');
-      //print(await http.read('http://89.74.231.9:8080/?'));
-    }
-  }
-
-  //HomeScreen({Key key}) : super(key: key);
+  
+    HomeScreen({Key key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+ 
   double statsColumnSpacing = 15;
   List<String> menuOptions = [
     "Statystyki",
@@ -291,7 +243,7 @@ class MainScreenStats extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(0, 0, 60, 0),
                     child: StatsTextColumn(statsColumnSpacing),
                   ),
-                  StatsNumberColumn(statsColumnSpacing),
+                  StatsNumberColumn(),
                 ],
               ),
             ),
@@ -382,42 +334,108 @@ class StatsTextColumn extends StatelessWidget {
   }
 }
 
-class StatsNumberColumn extends StatelessWidget {
-  double columnSpacing;
-  StatsNumberColumn(this.columnSpacing);
+class StatsNumberColumn extends StatefulWidget {
+
+  double columnSpacing=15;
+  StatsNumberColumn();
+
+  @override
+  _StatsNumberColumnState createState() => _StatsNumberColumnState();
+}
+
+class _StatsNumberColumnState extends State<StatsNumberColumn> {
+  SocketIO socketIO;
+
+  List<String> messages;
+
+  String day;
+
+  int active;
+
+  int death;
+
+  int i = 0;
+
+  @override
+    void initState() {
+      active = 0;
+      death = 0;
+    super.initState();
+    initStats();
+  }
+
+  Future<http.Response> fetchAlbum() {
+    return http.get('http://89.74.231.9:8080');
+  }
+
+  Future<void> initStats() async {
+    var url = 'http://89.74.231.9:8080'; //
+    var response = await http.get(url + '/countryDaily?'); //
+    //print('Response status: ${response.statusCode}');
+
+    if (response.statusCode == 200) {
+      List<dynamic> values = new List<dynamic>();
+      List<Map<String, dynamic>> _homeFechData =
+          new List<Map<String, dynamic>>();
+      values = json.decode(response.body);
+      if (values.length > 0) {
+        for (int i = 0; i < values.length; i++) {
+          if (values[i] != null) {
+            Map<String, dynamic> map = values[i];
+
+            print(map);
+
+            map.values.forEach((element) {
+              if (i == 2) day = element;
+              if (i == 3) active = element;
+              if (i == 5) death = element;
+              i++;
+            });
+
+            setState((){});
+
+            print(day);
+            print(active);
+            print(death);
+
+          }
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       Text(
-        "123 534",
+        active.toString(),
         style: TextStyle(
           color: CoronaColor().accent,
           fontWeight: FontWeight.bold,
           fontSize: 18,
         ),
       ),
-      SizedBox(height: columnSpacing),
+      SizedBox(height: widget.columnSpacing),
       Text(
-        "12 334",
+        "-",
         style: TextStyle(
           color: CoronaColor().accent,
           fontWeight: FontWeight.bold,
           fontSize: 18,
         ),
       ),
-      SizedBox(height: columnSpacing),
+      SizedBox(height: widget.columnSpacing),
       Text(
-        "1234",
+        death.toString(),
         style: TextStyle(
           color: CoronaColor().accent,
           fontWeight: FontWeight.bold,
           fontSize: 18,
         ),
       ),
-      SizedBox(height: columnSpacing),
+      SizedBox(height: widget.columnSpacing),
       Text(
-        "123",
+        "-",
         style: TextStyle(
           color: CoronaColor().accent,
           fontWeight: FontWeight.bold,

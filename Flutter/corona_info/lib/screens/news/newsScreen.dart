@@ -4,6 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:corona_info/widgets/Shadow.dart';
 
+
+class HomeFechData {
+  final String id;
+  final String province;
+  final String date_;
+  final String activeNumber;
+  final String activeNumberPer10k;
+  final String deaths;
+  final String deathsWithoutIll;
+  final String deathsWithIll;
+
+  HomeFechData(
+      this.id,
+      this.province,
+      this.date_,
+      this.activeNumber,
+      this.activeNumberPer10k,
+      this.deaths,
+      this.deathsWithoutIll,
+      this.deathsWithIll) {}
+
+ 
+  HomeFechData.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        province = json['province'],
+        date_ = json['date_'],
+        activeNumber = json['activeNumber'],
+        activeNumberPer10k = json['activeNumberPer10k'],
+        deaths = json['deaths'],
+        deathsWithoutIll = json['deathsWithoutIll'],
+        deathsWithIll = json['deathsWithIll'];
+}
+
+
 class NewsScreen extends StatelessWidget {
   NewsScreen({Key key}) : super(key: key);
   @override
