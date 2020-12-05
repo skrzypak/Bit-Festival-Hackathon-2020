@@ -71,7 +71,7 @@ app.get('/counties/:province', async(req, res) => {
 app.get('/countryDaily', async(req, res) => {
   let date = new Date().toISOString().slice(0, 10)
 
-  let query = `select * from provincesData where (DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59") AND province = "Cały kraj";`
+  let query = `select * from provincesData where (DATE(date_) BETWEEN "${date} 00:00:00" AND "${date} 23:59:59") AND province = "Ca�y kraj";`
   let data = await new Database().get(query)
   res.send(data)
 })
