@@ -20,7 +20,7 @@ class SymptomsComparisonGrid extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    boxShadow: [Shadow.get()],
+                    boxShadow: [CoronaShadow.get()],
                   ),
                   child: Center(
                     child: Text(
