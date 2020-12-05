@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:corona_info/screens/closestTestingPoint/closestTestingPoint.dart';
 import 'package:corona_info/screens/info/infoScreen.dart';
 import 'package:corona_info/screens/news/newsScreen.dart';
@@ -9,9 +11,28 @@ import 'package:corona_info/widgets/FontStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
+import 'package:flutter_socket_io/flutter_socket_io.dart';
+import 'package:flutter_socket_io/socket_io_manager.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen();
+  SocketIO socketIO;
+  List<String> messages;
+
+  HomeScreen() {
+    initState();
+  }
+
+  Future<void> initState() async {
+    var url = 'http://89.74.231.9:8080';
+    var response = await http.get('http://89.74.231.9:8080/?');
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    print(await http.read('http://89.74.231.9:8080/?'));
+  }
+
   //HomeScreen({Key key}) : super(key: key);
 
   @override
@@ -60,7 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               GestureDetector(
-                child: HomeScreenOptionTab("Informacje o Covid-19", "information"),
+                child:
+                    HomeScreenOptionTab("Informacje o Covid-19", "information"),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -104,7 +126,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               GestureDetector(
-                child: HomeScreenOptionTab("Najbliższy punkt poboru próbek", "seo"),
+                child: HomeScreenOptionTab(
+                    "Najbliższy punkt poboru próbek", "seo"),
                 onTap: () {
                   Navigator.push(
                     context,
