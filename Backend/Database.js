@@ -112,6 +112,17 @@ class Database {
     })
   }
 
+  async updateTestPointsLocation(uri) {
+    let query = "INSERT INTO testPoints (uri) VALUES ('https://www.gov.pl"+uri+"');"
+    let db = this.createConnection()
+    db.connect(()=> {
+      db.query("truncate table testPoints", (e) => {})
+      db.query(query, (e) => {
+        db.end()
+      })
+    })
+  }
+
   createConnection(){
     return sql.createConnection(config)
   }

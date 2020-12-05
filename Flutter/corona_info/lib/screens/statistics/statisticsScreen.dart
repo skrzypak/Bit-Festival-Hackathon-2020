@@ -69,7 +69,7 @@ class StatisticsScreen extends StatelessWidget {
                       activeFgColor: Colors.black87,
                       inactiveBgColor: Colors.white,
                       cornerRadius: 200,
-                      minWidth: 100,
+                      minWidth: 50,
                       initialLabelIndex: 0,
                       labels: ['Tygodniowe', 'Miesięczne', 'Całość'],
                       onToggle: (index) {
